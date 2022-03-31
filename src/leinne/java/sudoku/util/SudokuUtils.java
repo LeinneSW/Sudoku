@@ -6,6 +6,10 @@ import java.util.HashSet;
 public class SudokuUtils{
 
     public static int[][] parse(String sudoku){
+        if(sudoku.length() != 81){
+            throw new IllegalArgumentException("Wrong problem. Sudoku must consist of 81 numbers.");
+        }
+
         var sudokuArray = new int[9][9];
         var sudokuSplit = sudoku.trim().split("");
         for(int i = 0; i < 9; ++i){
