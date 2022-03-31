@@ -7,12 +7,12 @@ import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.*;
 
-public class SudokuGameScreen extends JFrame{
+public class InGameScreen extends JFrame{
 
     private final JPanel timerPanel = new JPanel();
     private final JPanel gamePanel = new JPanel(new GridLayout(9, 9, 0, 0));
 
-    public SudokuGameScreen(){
+    public InGameScreen(){
         super("스도쿠");
 
         var main = getContentPane();

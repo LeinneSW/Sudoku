@@ -3,9 +3,9 @@ package leinne.java.sudoku.ui.screen;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainScreen extends JFrame{
+public class LoginScreen extends JFrame{
 
-    public MainScreen(){
+    public LoginScreen(){
         super("스도쿠");
         var panel = getContentPane();
         panel.setLayout(new FlowLayout());
@@ -22,7 +22,7 @@ public class MainScreen extends JFrame{
         var button = new JButton("게임 시작");
         button.addActionListener(e -> {
             setVisible(false);
-            var frame = new SudokuGameScreen();
+            var frame = new InGameScreen();
             frame.setProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
             frame.setVisible(true);
         });
