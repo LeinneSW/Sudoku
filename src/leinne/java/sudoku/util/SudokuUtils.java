@@ -16,6 +16,16 @@ public class SudokuUtils{
         return sudokuArray;
     }
 
+    public static String serialize(int[][] sudoku){
+        StringBuilder s = new StringBuilder();
+        for(int i = 0; i < 9; ++i){
+            for(int j = 0; j < 9; ++j){
+                s.append(sudoku[i][j]);
+            }
+        }
+        return s.toString();
+    }
+
     public static int[][] solve(final int[][] board){
         var solveBoard = new int[9][9];
         for(int i = 0; i < 9; ++i){
