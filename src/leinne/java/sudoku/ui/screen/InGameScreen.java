@@ -33,6 +33,7 @@ public class InGameScreen extends JFrame{
             var second = t % 60;
             lblTimer.setText(String.format("%02d:%02d:%02d", hour, minute, second));
         });
+        timer.start();
 
         setSize(500, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
