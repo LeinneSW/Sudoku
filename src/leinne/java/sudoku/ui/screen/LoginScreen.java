@@ -19,12 +19,10 @@ public class LoginScreen extends JFrame{
         var txtPass = new JTextField(10);
         panel.add(txtPass);
 
-        var button = new JButton("게임 시작");
+        var button = new JButton("로그인");
         button.addActionListener(e -> {
             setVisible(false);
-            var frame = new InGameScreen();
-            frame.setProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
-            frame.setVisible(true);
+            new SelectProblemScreen().setVisible(true);
         });
         panel.add(button);
 
