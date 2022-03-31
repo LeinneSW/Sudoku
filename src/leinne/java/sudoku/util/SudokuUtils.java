@@ -68,9 +68,13 @@ public class SudokuUtils{
     }
 
     public static boolean isValidProblem(int[][] problem){
+        if(problem.length != 9){
+            return false;
+        }
+
         for(int i = 0; i < 9; ++i){
             for(int j = 0; j < 9; ++j){
-                if(problem[i][j] > 0 && isNestedNumber(i, j, problem)){
+                if(problem[i].length != 9 || (problem[i][j] > 0 && isNestedNumber(i, j, problem))){
                     return false;
                 }
             }
