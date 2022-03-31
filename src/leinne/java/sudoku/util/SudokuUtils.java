@@ -1,7 +1,6 @@
 package leinne.java.sudoku.util;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class SudokuUtils{
 
