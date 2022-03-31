@@ -11,7 +11,7 @@ public class SelectProblemScreen extends JFrame{
         btn.addActionListener((e) -> {
             setVisible(false);
             var gameScreen = new InGameScreen();
-            gameScreen.setProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
+            gameScreen.getGamePanel().setSudokuProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
             gameScreen.setVisible(true);
         });
         getContentPane().setLayout(new FlowLayout());
