@@ -1,5 +1,6 @@
 package leinne.java.sudoku;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import leinne.java.sudoku.db.DBManager;
 import leinne.java.sudoku.ui.window.InGameWindow;
 import leinne.java.sudoku.ui.window.LoginWindow;
@@ -29,6 +30,7 @@ public final class SudokuSystem{
     }
 
     public void startApp(){
+        FlatLightLaf.setup();
         dbManager.connect();
         windowManager.setCurrentWindow(new LoginWindow());
     }
