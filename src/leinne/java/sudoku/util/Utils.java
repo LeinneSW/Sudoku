@@ -4,10 +4,13 @@ public class Utils{
 
     public static int parseInt(String num){
         try{
-            var number = Integer.parseInt(num);
-            return number > 9 ? 0 : Math.max(number, 0);
+            return convertNumber(Integer.parseInt(num));
         }catch(NumberFormatException e){
             return 0;
         }
+    }
+
+    public static int convertNumber(int number){
+        return number > 9 ? 0 : Math.max(number, 0);
     }
 }
