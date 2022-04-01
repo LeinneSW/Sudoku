@@ -10,19 +10,21 @@ public class WindowManager{
 
     private WindowManager(){}
 
-    private final LoginWindow loginWindow = new LoginWindow();
-    private final InGameWindow inGameWindow = new InGameWindow();
-    private final SelectProblemWindow selectProblemWindow = new SelectProblemWindow();
+    private Window currentWindow = null;
 
-    public LoginWindow getLoginWindow(){
-        return loginWindow;
+    public Window getCurrentWindow(){
+        return currentWindow;
     }
 
-    public InGameWindow getInGameWindow(){
-        return inGameWindow;
-    }
+    public void setCurrentWindow(Window window){
+        if(currentWindow == window){
+            return;
+        }
 
-    public SelectProblemWindow getSelectProblemWindow(){
-        return selectProblemWindow;
+        window.open();
+        if(currentWindow != null){
+            currentWindow.close();
+        }
+        currentWindow = window;
     }
 }

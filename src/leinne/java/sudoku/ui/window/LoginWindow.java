@@ -3,10 +3,9 @@ package leinne.java.sudoku.ui.window;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginWindow extends JFrame{
+public class LoginWindow extends Window{
 
     public LoginWindow(){
-        super("스도쿠");
         var panel = getContentPane();
         panel.setLayout(new FlowLayout());
 
@@ -20,13 +19,7 @@ public class LoginWindow extends JFrame{
         panel.add(txtPass);
 
         var button = new JButton("로그인");
-        button.addActionListener(e -> {
-            setVisible(false);
-            WindowManager.getInstance().getSelectProblemWindow().setVisible(true);
-        });
+        button.addActionListener(e -> WindowManager.getInstance().setCurrentWindow(new SelectProblemWindow()));
         panel.add(button);
-
-        setSize(500, 600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
