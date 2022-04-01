@@ -41,7 +41,7 @@ public final class SudokuSystem{
         }
 
         for(var tile : window.getGamePanel().getNumberTiles()){
-            if(tile.isNesting()) return false;
+            if(tile.isNesting() || tile.getNumber() == 0) return false;
         }
         return true;
     }
