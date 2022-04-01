@@ -14,6 +14,7 @@ public abstract class Window extends JFrame{
                 onClosing();
             }
         });
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     public void open(){
