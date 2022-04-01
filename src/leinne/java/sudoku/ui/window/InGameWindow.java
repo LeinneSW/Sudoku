@@ -58,13 +58,6 @@ public class InGameWindow extends Window{
         return gamePanel;
     }
 
-    public boolean isSolved(){
-        for(var tile : gamePanel.getNumberTiles()){
-            if(tile.isNesting()) return false;
-        }
-        return true;
-    }
-
     public void saveRecode(){
         // TODO
     }
