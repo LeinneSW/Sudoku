@@ -8,25 +8,30 @@ import java.util.HashSet;
 
 public final class NumberTile extends JTextField{
 
-    public static final Color FIXED = new Color(215, 215, 215);
-    public static final Color WARNING = new Color(227, 108, 108);
+    public static final class Style{
+        public static final Color FIXED_ODD = new Color(227, 227, 227);
+        public static final Color WARNING_ODD = new Color(241, 137, 137);
+        public static final Color DEFAULT_ODD = new Color(255, 255, 197);
 
-    private static final Font DEFAULT_FONT = new Font("Dialog", Font.BOLD, 22);
+        public static final Color FIXED_EVEN = new Color(190, 190, 190);
+        public static final Color WARNING_EVEN = new Color(225, 102, 102);
+        public static final Color DEFAULT_EVEN = new Color(255, 255, 255);
+
+        public static final Font FIXED_FONT = new Font("Dialog", Font.BOLD, 30);
+        public static final Font DEFAULT_FONT = new Font("Dialog", Font.PLAIN, 30);
+
+        private Style(){}
+    }
 
     private int number = 0;
     private final int myIndex;
     private final HashSet<Integer> nesting = new HashSet<>();
 
-    public NumberTile(int index){
-        this(index, 0);
-    }
-
-    public NumberTile(int index, int number){
+    public NumberTile(int index, int problemNumber){
         super();
         myIndex = index;
-        setNumber(number);
-
-        setFont(DEFAULT_FONT);
+        updateBackground();
+        setProblemNumber(problemNumber);
         setHorizontalAlignment(JTextField.CENTER);
         addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
@@ -36,9 +41,9 @@ public final class NumberTile extends JTextField{
             public void keyReleased(KeyEvent e){
                 var c = e.getKeyChar();
                 if('1' <= c && c <= '9'){
-                    changeNumber(c - 48);
+                    setNumber(c - 48);
                 }else if(c == '0' || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE){
-                    changeNumber(0);
+                    setNumber(0);
                 }
             }
         });
@@ -56,18 +61,51 @@ public final class NumberTile extends JTextField{
         return myIndex % 9;
     }
 
+    /**
+     * This method is added for code intuition.
+     */
+    public boolean isProblemNumber(){
+        return !isFocusable();
+    }
+
     public int getNumber(){
         return number;
     }
 
     public void setNumber(int number){
+        setNumber(number, false);
+    }
+
+    public void setNumber(int number, boolean verify){
+        number = Math.max(number > 9 ? 0 : number, 0);
+        if(verify){
+            for(int i = 0; i < 9; ++i){
+                checkNesting(getRow() * 9 + i, number); // i: 가로
+                checkNesting(getColumn() + i * 9, number); // i: 세로
+            }
+
+            for(int row = getRow() / 3 * 3, rowEnd = row + 3; row < rowEnd; ++row){
+                for(int col = getColumn() / 3 * 3, colEnd = col + 3; col < colEnd; ++col){ // 3 * 3
+                    checkNesting(row * 9 + col, number);
+                }
+            }
+        }else if(number == 0){
+            nesting.clear();
+            updateBackground();
+        }
         this.number = number;
-        setText(number <= 0 ? "" : (number > 9 ? "" : number + ""));
+        setText(this.number == 0 ? "" : this.number + "");
     }
 
     public void setProblemNumber(int number){
+        if(number < 1 || number > 9){
+            setFont(Style.DEFAULT_FONT);
+            return;
+        }
+
         setNumber(number);
         setFocusable(false);
+        setFont(Style.FIXED_FONT);
     }
 
     public void setFocusable(boolean focusable){
@@ -75,27 +113,14 @@ public final class NumberTile extends JTextField{
         updateBackground();
     }
 
-    private void changeNumber(int newNumber){
-        for(int i = 0; i < 9; ++i){
-            checkNesting(getRow() * 9 + i, newNumber); // i: 가로
-            checkNesting(getColumn() + i * 9, newNumber); // i: 세로
-        }
-
-        for(int row = getRow() / 3 * 3, rowEnd = row + 3; row < rowEnd; ++row){
-            for(int col = getColumn() / 3 * 3, colEnd = col + 3; col < colEnd; ++col){ // 3 * 3
-                checkNesting(row * 9 + col, newNumber);
-            }
-        }
-        setNumber(newNumber);
-    }
-
     private void updateBackground(){
+        var isEven = ((getRow() / 3 - 1) * 3 + getColumn() / 3) % 2 == 0;
         if(!isFocusable()){
-            setBackground(FIXED);
+            setBackground(isEven ? Style.FIXED_EVEN : Style.FIXED_ODD);
         }else if(nesting.isEmpty()){
-            setBackground(Color.WHITE);
+            setBackground(isEven ? Style.DEFAULT_EVEN : Style.DEFAULT_ODD);
         }else{
-            setBackground(WARNING);
+            setBackground(isEven ? Style.WARNING_EVEN : Style.WARNING_ODD);
         }
     }
 
