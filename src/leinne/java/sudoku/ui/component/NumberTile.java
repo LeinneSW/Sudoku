@@ -116,13 +116,16 @@ public final class NumberTile extends JTextField{
 
     private void updateBackground(){
         var isEven = ((getRow() / 3 - 1) * 3 + getColumn() / 3) % 2 == 0;
+        Color color;
         if(!isFocusable()){
-            setBackground(Style.FIXED);
+            color = Style.FIXED;
         }else if(nesting.isEmpty()){
-            setBackground(isEven ? Style.DEFAULT_EVEN : Style.DEFAULT_ODD);
+            color = isEven ? Style.DEFAULT_EVEN : Style.DEFAULT_ODD;
         }else{
-            setBackground(isEven ? Style.WARNING_EVEN : Style.WARNING_ODD);
+            color = isEven ? Style.WARNING_EVEN : Style.WARNING_ODD;
         }
+        setBackground(color);
+        setCaretColor(color);
     }
 
     private void addNesting(int index){
