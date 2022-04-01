@@ -1,5 +1,7 @@
 package leinne.java.sudoku.ui.window;
 
+import leinne.java.sudoku.SudokuSystem;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,7 +21,7 @@ public class LoginWindow extends Window{
         panel.add(txtPass);
 
         var button = new JButton("로그인");
-        button.addActionListener(e -> WindowManager.getInstance().setCurrentWindow(new SelectProblemWindow()));
+        button.addActionListener(e -> SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new SelectProblemWindow()));
         panel.add(button);
     }
 }

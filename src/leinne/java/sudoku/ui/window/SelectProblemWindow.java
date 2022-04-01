@@ -1,5 +1,7 @@
 package leinne.java.sudoku.ui.window;
 
+import leinne.java.sudoku.SudokuSystem;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,7 @@ public class SelectProblemWindow extends Window{
         btn.addActionListener((e) -> {
             var gameScreen = new InGameWindow();
             gameScreen.getGamePanel().setSudokuProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
-            WindowManager.getInstance().setCurrentWindow(gameScreen);
+            SudokuSystem.getInstance().getWindowManager().setCurrentWindow(gameScreen);
         });
         getContentPane().setLayout(new FlowLayout());
         getContentPane().add(btn);

@@ -1,5 +1,6 @@
 package leinne.java.sudoku.ui.window;
 
+import leinne.java.sudoku.SudokuSystem;
 import leinne.java.sudoku.ui.component.GamePanel;
 
 import java.awt.*;
@@ -46,7 +47,7 @@ public class InGameWindow extends Window{
     }
 
     public void onClosing(){
-        WindowManager.getInstance().setCurrentWindow(new SelectProblemWindow());
+        SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new SelectProblemWindow());
     }
 
     public int getTime(){

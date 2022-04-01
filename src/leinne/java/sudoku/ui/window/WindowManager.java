@@ -2,14 +2,6 @@ package leinne.java.sudoku.ui.window;
 
 public class WindowManager{
 
-    private static final WindowManager instance = new WindowManager();
-
-    public static WindowManager getInstance(){
-        return instance;
-    }
-
-    private WindowManager(){}
-
     private Window currentWindow = null;
 
     public Window getCurrentWindow(){
