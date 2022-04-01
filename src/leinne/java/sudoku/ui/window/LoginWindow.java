@@ -1,11 +1,11 @@
-package leinne.java.sudoku.ui.screen;
+package leinne.java.sudoku.ui.window;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginScreen extends JFrame{
+public class LoginWindow extends JFrame{
 
-    public LoginScreen(){
+    public LoginWindow(){
         super("스도쿠");
         var panel = getContentPane();
         panel.setLayout(new FlowLayout());
@@ -22,7 +22,7 @@ public class LoginScreen extends JFrame{
         var button = new JButton("로그인");
         button.addActionListener(e -> {
             setVisible(false);
-            ScreenManager.getInstance().getSelectProblemScreen().setVisible(true);
+            WindowManager.getInstance().getSelectProblemWindow().setVisible(true);
         });
         panel.add(button);
 

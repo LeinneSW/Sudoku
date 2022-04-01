@@ -1,4 +1,4 @@
-package leinne.java.sudoku.ui.screen;
+package leinne.java.sudoku.ui.window;
 
 import leinne.java.sudoku.ui.component.GamePanel;
 
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.*;
 
-public class InGameScreen extends JFrame{
+public class InGameWindow extends JFrame{
 
     private static final String TIMER_FORMAT = "%02d:%02d:%02d";
 
@@ -14,7 +14,7 @@ public class InGameScreen extends JFrame{
     private final AtomicInteger time = new AtomicInteger();
     private final GamePanel gamePanel = new GamePanel(new GridLayout(9, 9, 0, 0));
 
-    public InGameScreen(){
+    public InGameWindow(){
         super("스도쿠");
 
         var main = getContentPane();

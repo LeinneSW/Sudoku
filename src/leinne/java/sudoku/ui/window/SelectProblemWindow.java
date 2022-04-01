@@ -1,16 +1,16 @@
-package leinne.java.sudoku.ui.screen;
+package leinne.java.sudoku.ui.window;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SelectProblemScreen extends JFrame{
+public class SelectProblemWindow extends JFrame{
 
-    public SelectProblemScreen(){
+    public SelectProblemWindow(){
         super("스도쿠");
         var btn = new JButton("게임시작");
         btn.addActionListener((e) -> {
             setVisible(false);
-            var gameScreen = ScreenManager.getInstance().getInGameScreen();
+            var gameScreen = WindowManager.getInstance().getInGameWindow();
             gameScreen.getGamePanel().setSudokuProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
             gameScreen.setVisible(true);
         });
