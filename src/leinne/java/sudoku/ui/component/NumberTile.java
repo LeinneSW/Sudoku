@@ -73,7 +73,7 @@ public final class NumberTile extends JTextField{
     }
 
     public void setNumber(int number){
-        setNumber(number, false);
+        setNumber(number, true);
     }
 
     public void setNumber(int number, boolean verify){
@@ -103,8 +103,8 @@ public final class NumberTile extends JTextField{
             return;
         }
 
-        setNumber(number);
         setFocusable(false);
+        setNumber(number, false);
         setFont(Style.FIXED_FONT);
     }
 
