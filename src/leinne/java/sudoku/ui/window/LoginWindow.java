@@ -17,11 +17,16 @@ public class LoginWindow extends Window{
         panel.add(txtId);
         var lblPass = new JLabel("비밀번호 ");
         panel.add(lblPass);
-        var txtPass = new JTextField(10);
+        var txtPass = new JPasswordField(10);
         panel.add(txtPass);
 
-        var button = new JButton("로그인");
-        button.addActionListener(e -> SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new SelectProblemWindow()));
-        panel.add(button);
+        var btnLogin = new JButton("로그인");
+        // TODO: login system with db
+        btnLogin.addActionListener(e -> SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new SelectProblemWindow()));
+        panel.add(btnLogin);
+
+        var btnRegister = new JButton("회원가입");
+        btnRegister.addActionListener(e -> SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new RegisterWindow()));
+        panel.add(btnRegister);
     }
 }
