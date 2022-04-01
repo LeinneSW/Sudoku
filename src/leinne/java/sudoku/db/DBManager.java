@@ -9,6 +9,10 @@ public class DBManager{
     private Connection connection = null;
 
     public void connect(){
+        if(!isClosed()){
+            return;
+        }
+
         try{
             var conn = DriverManager.getConnection("jdbc:mariadb://todo.net:3306/sudoku", "todo", "todo");
             if(conn != null){
