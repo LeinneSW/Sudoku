@@ -1,11 +1,10 @@
 package leinne.java.sudoku;
 
-import leinne.java.sudoku.ui.screen.LoginScreen;
+import leinne.java.sudoku.ui.screen.ScreenManager;
 
 public class Main{
 
     public static void main(String[] args){
-        var frame = new LoginScreen();
-        frame.setVisible(true);
+        ScreenManager.getInstance().getLoginScreen().setVisible(true);
     }
 }

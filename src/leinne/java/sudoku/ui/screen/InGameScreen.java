@@ -8,6 +8,10 @@ import javax.swing.*;
 
 public class InGameScreen extends JFrame{
 
+    private static final String TIMER_FORMAT = "%02d:%02d:%02d";
+
+    private final Timer timer;
+    private final AtomicInteger time = new AtomicInteger();
     private final GamePanel gamePanel = new GamePanel(new GridLayout(9, 9, 0, 0));
 
     public InGameScreen(){
@@ -22,21 +26,31 @@ public class InGameScreen extends JFrame{
 
         // create timer, menu button
         var lblTimer = new JLabel("00:00:00");
-        lblTimer.setFont(new Font("Dialog", Font.BOLD, 25));
+        lblTimer.setFont(new Font("Dialog", Font.BOLD, 32));
         topPanel.add(lblTimer);
 
-        AtomicInteger time = new AtomicInteger();
-        var timer = new Timer(1000, (event) -> {
+        timer = new Timer(1000, (event) -> {
             var t = time.incrementAndGet();
-            var hour = t / 3600;
-            var minute = t / 60;
-            var second = t % 60;
-            lblTimer.setText(String.format("%02d:%02d:%02d", hour, minute, second));
+            lblTimer.setText(String.format(TIMER_FORMAT, t / 3600, t / 60, t % 60));
         });
         timer.start();
 
         setSize(500, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void setVisible(boolean b){
+        super.setVisible(b);
+        if(b){
+            timer.start();
+        }else{
+            time.set(0);
+            timer.stop();
+        }
+    }
+
+    public int getTime(){
+        return time.get();
     }
 
     public GamePanel getGamePanel(){

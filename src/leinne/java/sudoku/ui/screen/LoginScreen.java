@@ -22,7 +22,7 @@ public class LoginScreen extends JFrame{
         var button = new JButton("로그인");
         button.addActionListener(e -> {
             setVisible(false);
-            new SelectProblemScreen().setVisible(true);
+            ScreenManager.getInstance().getSelectProblemScreen().setVisible(true);
         });
         panel.add(button);
 
