@@ -45,6 +45,10 @@ public class InGameWindow extends Window{
         timer.stop();
     }
 
+    public void onClosing(){
+        WindowManager.getInstance().setCurrentWindow(new SelectProblemWindow());
+    }
+
     public int getTime(){
         return time.get();
     }
