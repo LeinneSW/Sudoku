@@ -1,5 +1,7 @@
 package leinne.java.sudoku.ui.window;
 
+import leinne.java.sudoku.SudokuSystem;
+
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
@@ -22,6 +24,10 @@ public abstract class Window extends JFrame{
     protected abstract void initDesign();
 
     public void open(){
+        if(SudokuSystem.getInstance().getWindowManager().getCurrentWindow() != this){
+            throw new RuntimeException("Window should only be managed through the WindowManager.");
+        }
+
         if(justCreate){
             justCreate = false;
             initDesign();
@@ -30,6 +36,10 @@ public abstract class Window extends JFrame{
     }
 
     public void close(){
+        if(SudokuSystem.getInstance().getWindowManager().getCurrentWindow() != this){
+            throw new RuntimeException("Window should only be managed through the WindowManager.");
+        }
+
         setVisible(false);
     }
 

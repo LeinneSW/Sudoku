@@ -13,10 +13,10 @@ public class WindowManager{
             return;
         }
 
-        window.open();
         if(currentWindow != null){
             currentWindow.close();
         }
         currentWindow = window;
+        window.open();
     }
 }
