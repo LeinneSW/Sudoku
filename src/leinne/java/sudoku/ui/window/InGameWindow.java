@@ -15,7 +15,7 @@ public class InGameWindow extends Window{
     private final AtomicInteger time = new AtomicInteger();
     private final GamePanel gamePanel = new GamePanel(new GridLayout(9, 9, 0, 0));
 
-    public InGameWindow(){
+    protected void initDesign(){
         var main = getContentPane();
         main.setLayout(new BorderLayout());
 

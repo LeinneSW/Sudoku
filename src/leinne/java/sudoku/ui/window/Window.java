@@ -1,10 +1,12 @@
 package leinne.java.sudoku.ui.window;
 
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
 
 public abstract class Window extends JFrame{
+
+    protected boolean justCreate = true;
 
     public Window(){
         super("스도쿠");
@@ -17,7 +19,13 @@ public abstract class Window extends JFrame{
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
+    protected abstract void initDesign();
+
     public void open(){
+        if(justCreate){
+            justCreate = false;
+            initDesign();
+        }
         setVisible(true);
     }
 

@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class LoginWindow extends Window{
 
-    public LoginWindow(){
+    protected void initDesign(){
         var panel = getContentPane();
         panel.setLayout(new FlowLayout());
 
