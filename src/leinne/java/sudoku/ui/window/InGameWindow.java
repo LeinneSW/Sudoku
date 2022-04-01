@@ -10,7 +10,7 @@ public class InGameWindow extends JFrame{
 
     private static final String TIMER_FORMAT = "%02d:%02d:%02d";
 
-    private final Timer timer;
+    private final Timer timer = new Timer(1000, null);
     private final AtomicInteger time = new AtomicInteger();
     private final GamePanel gamePanel = new GamePanel(new GridLayout(9, 9, 0, 0));
 
@@ -29,7 +29,7 @@ public class InGameWindow extends JFrame{
         lblTimer.setFont(new Font("Dialog", Font.BOLD, 32));
         topPanel.add(lblTimer);
 
-        timer = new Timer(1000, (event) -> {
+        timer.addActionListener((event) -> {
             var t = time.incrementAndGet();
             lblTimer.setText(String.format(TIMER_FORMAT, t / 3600, t / 60, t % 60));
         });
