@@ -1,10 +1,10 @@
 # Sudoku
-Solve simple yet complex math problems.
+### This is very simple yet very difficult. This is a game to solve such math problems.
 
 ## Introduce
-The name Sudoku comes from Japan.  
-'su' means a number and 'doku' means single, so it's a game to avoid duplicate numbers.  
-Basically, it is played on a 9 x 9 board, and it is a game of filling in all the numbers from 1 to 9 in a 3 x 3 grid, horizontally and vertically so that they do not overlap.
+Sudoku is a Japanese word that is a compound word of 'su' meaning number and 'doku' meaning single.  
+As the name of the game suggests, it is a game where you fill in all the numbers without overlapping them.  
+A 9 * 9 board is common, and all you have to do is fill in all the numbers from 1 to 9 in 3 x 3 grids, horizontally and vertically.
 
 ## Dependency
 - MariaDB
