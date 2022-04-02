@@ -7,5 +7,6 @@ As the name of the game suggests, it is a game where you fill in all the numbers
 A 9 * 9 board is common, and all you have to do is fill in all the numbers from 1 to 9 in 3 x 3 grids, horizontally and vertically.
 
 ## Dependency
-- MariaDB
-- FlatLaf
+- int4j v0.5.4
+- FlatLaf v2.1
+- MariaDB v3.0.4
