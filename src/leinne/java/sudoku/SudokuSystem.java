@@ -38,11 +38,11 @@ public final class SudokuSystem{
 
     private void startApp(){
         FlatLightLaf.setup();
-        while(!dbManager.connect()){
+        /*while(!dbManager.connect()){
             if(Utils.showDialog("DB 접속 실패", "DB 서버에 접속할 수 없습니다.\n다시 시도하시겠습니까?") != JOptionPane.YES_OPTION){
                 System.exit(0);
             }
-        }
+        }*/
 
         for(var i = 0; i < 9; ++i){
             for(var j = 0; j < 9; ++j){
@@ -67,10 +67,6 @@ public final class SudokuSystem{
     }
 
     public boolean isSolved(){
-        if(!(windowManager.getCurrentWindow() instanceof InGameWindow)){
-            return false;
-        }
-
         for(var tiles : gameBoard){
             for(var tile : tiles){
                 if(tile.isNesting() || tile.getNumber() == 0) return false;
