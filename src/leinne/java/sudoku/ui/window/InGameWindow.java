@@ -66,10 +66,6 @@ public class InGameWindow extends Window{
         timer.stop();
     }
 
-    public void onClosing(){
-        SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new SelectProblemWindow());
-    }
-
     public long getTime(){
         return (System.nanoTime() - startTime) / 10000000;
     }
