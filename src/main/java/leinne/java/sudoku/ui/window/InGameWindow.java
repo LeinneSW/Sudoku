@@ -12,13 +12,13 @@ public class InGameWindow extends Window{
 
     private long startTime;
     private final Timer timer = new Timer(20, null);
-    private final JPanel gamePanel = new JPanel(new GridLayout(9, 9, 0, 0));
 
     protected void initDesign(){
         var main = getContentPane();
         main.setLayout(new BorderLayout());
 
         var topPanel = new JPanel();
+        var gamePanel = new JPanel(new GridLayout(9, 9, 0, 0));
         main.add(topPanel, BorderLayout.NORTH);
         main.add(gamePanel, BorderLayout.CENTER);
 
