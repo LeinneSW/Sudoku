@@ -35,9 +35,10 @@ public class InGameWindow extends Window{
 
         var btnClear = new JButton("초기화");
         btnClear.addActionListener((event) -> {
-            for(var tiles : SudokuSystem.getInstance().getNumberTiles()){
-                for(var tile : tiles){
-                    tile.clear();
+            var tiles = SudokuSystem.getInstance().getNumberTiles();
+            for(int row = 0;  row < 9; ++row){
+                for(int column = 0; column < 9; ++column){
+                    tiles[row][column].clear();
                 }
             }
         });
@@ -48,9 +49,10 @@ public class InGameWindow extends Window{
         topPanel.add(btnStop);
 
         // add number text field
-        for(var tiles : SudokuSystem.getInstance().getNumberTiles()){
-            for(var tile : tiles){
-                gamePanel.add(new NumberTextField(tile));
+        var tiles = SudokuSystem.getInstance().getNumberTiles();
+        for(int row = 0;  row < 9; ++row){
+            for(int column = 0; column < 9; ++column){
+                gamePanel.add(new NumberTextField(tiles[row][column]));
             }
         }
     }

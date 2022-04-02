@@ -3,13 +3,9 @@ package leinne.java.sudoku;
 import com.formdev.flatlaf.FlatLightLaf;
 import leinne.java.sudoku.db.DBManager;
 import leinne.java.sudoku.entity.NumberTile;
-import leinne.java.sudoku.ui.window.InGameWindow;
 import leinne.java.sudoku.ui.window.LoginWindow;
 import leinne.java.sudoku.ui.window.WindowManager;
 import leinne.java.sudoku.util.SudokuUtils;
-import leinne.java.sudoku.util.Utils;
-
-import javax.swing.*;
 
 public final class SudokuSystem{
 
@@ -59,16 +55,17 @@ public final class SudokuSystem{
         }
 
 
-        for(var tiles : SudokuSystem.getInstance().getNumberTiles()){
-            for(var tile : tiles){
-                tile.setNumber(sudokuArray[tile.row][tile.column], true);
+        for(int row = 0;  row < 9; ++row){
+            for(int column = 0; column < 9; ++column){
+                gameBoard[row][column].setNumber(sudokuArray[row][column], true);
             }
         }
     }
 
     public boolean isSolved(){
-        for(var tiles : gameBoard){
-            for(var tile : tiles){
+        for(int row = 0;  row < 9; ++row){
+            for(int column = 0; column < 9; ++column){
+                var tile = gameBoard[row][column];
                 if(tile.isNesting() || tile.getNumber() == 0) return false;
             }
         }
