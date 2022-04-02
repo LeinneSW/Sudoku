@@ -11,10 +11,11 @@ import java.util.HashSet;
 public final class NumberTile extends JTextField{
 
     public static final class Style{
-        public static final Color FIXED = new Color(225, 225, 225);
+        public static final Color FIXED_ODD = new Color(227, 227, 227);
         public static final Color WARNING_ODD = new Color(241, 137, 137);
         public static final Color DEFAULT_ODD = new Color(255, 255, 197);
 
+        public static final Color FIXED_EVEN = new Color(190, 190, 190);
         public static final Color WARNING_EVEN = new Color(225, 102, 102);
         public static final Color DEFAULT_EVEN = new Color(255, 255, 255);
 
@@ -118,7 +119,7 @@ public final class NumberTile extends JTextField{
         var isEven = ((getRow() / 3 - 1) * 3 + getColumn() / 3) % 2 == 0;
         Color color;
         if(!isFocusable()){
-            color = Style.FIXED;
+            color = isEven ? Style.FIXED_EVEN : Style.FIXED_ODD;
         }else if(nesting.isEmpty()){
             color = isEven ? Style.DEFAULT_EVEN : Style.DEFAULT_ODD;
         }else{
