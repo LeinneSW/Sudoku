@@ -2,9 +2,11 @@ package leinne.java.sudoku;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import leinne.java.sudoku.db.DBManager;
+import leinne.java.sudoku.entity.NumberTile;
 import leinne.java.sudoku.ui.window.InGameWindow;
 import leinne.java.sudoku.ui.window.LoginWindow;
 import leinne.java.sudoku.ui.window.WindowManager;
+import leinne.java.sudoku.util.SudokuUtils;
 
 public final class SudokuSystem{
 
@@ -13,8 +15,10 @@ public final class SudokuSystem{
     private final DBManager dbManager = new DBManager();
     private final WindowManager windowManager = new WindowManager();
 
+    private final NumberTile[][] gameBoard = new NumberTile[9][9];
+
     public static void main(String[] args){
-        SudokuSystem.getInstance().startApp();
+        instance.startApp();
     }
 
     public static SudokuSystem getInstance(){
@@ -29,20 +33,82 @@ public final class SudokuSystem{
         return windowManager;
     }
 
-    public void startApp(){
+    private void startApp(){
         FlatLightLaf.setup();
         dbManager.connect();
+
+        for(var i = 0; i < 9; ++i){
+            for(var j = 0; j < 9; ++j){
+                gameBoard[i][j] = new NumberTile(i, j);
+            }
+        }
         windowManager.setCurrentWindow(new LoginWindow());
     }
 
+    public void setProblem(String sudoku){
+        var sudokuArray = SudokuUtils.parse(sudoku);
+        if(!SudokuUtils.isValidProblem(sudokuArray)){
+            return;
+        }
+
+
+        for(var tiles : SudokuSystem.getInstance().getNumberTiles()){
+            for(var tile : tiles){
+                tile.setNumber(sudokuArray[tile.row][tile.column], true);
+            }
+        }
+    }
+
     public boolean isSolved(){
-        if(!(windowManager.getCurrentWindow() instanceof InGameWindow window)){
+        if(!(windowManager.getCurrentWindow() instanceof InGameWindow)){
             return false;
         }
 
-        for(var tile : window.getGamePanel().getNumberTiles()){
-            if(tile.isNesting() || tile.getNumber() == 0) return false;
+        for(var tiles : gameBoard){
+            for(var tile : tiles){
+                if(tile.isNesting() || tile.getNumber() == 0) return false;
+            }
         }
         return true;
+    }
+
+    public NumberTile getNumberTile(int row, int column){
+        return row >= 0 && row < 9 && column >= 0 && column < 9 ? gameBoard[row][column] : null;
+    }
+
+    public NumberTile[][] getNumberTiles(){
+        return gameBoard;
+    }
+
+    public void setNumber(NumberTile my, int number){
+        if(!my.isValid()){
+            return;
+        }
+
+        for(int i = 0; i < 9; ++i){
+            verifyNumber(my, gameBoard[my.row][i], number); // i: 가로
+            verifyNumber(my, gameBoard[i][my.column], number); // i: 세로
+        }
+
+        for(int rowStart = my.row / 3 * 3, rowEnd = rowStart + 3; rowStart < rowEnd; ++rowStart){
+            for(int colStart = my.column / 3 * 3, colEnd = colStart + 3; colStart < colEnd; ++colStart){ // 3 * 3
+                verifyNumber(my, gameBoard[rowStart][colStart], number);
+            }
+        }
+        my.setNumber(number);
+    }
+
+    private void verifyNumber(NumberTile my, NumberTile other, int number){
+        if(my.getIndex() == other.getIndex()){
+            return;
+        }
+
+        if(number > 0 && number == other.getNumber()){
+            my.addNesting(other.getIndex());
+            other.addNesting(my.getIndex());
+        }else if(my.getNumber() == other.getNumber()){
+            my.removeNesting(other.getIndex());
+            other.removeNesting(my.getIndex());
+        }
     }
 }

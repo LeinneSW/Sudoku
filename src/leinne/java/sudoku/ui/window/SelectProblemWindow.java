@@ -13,9 +13,9 @@ public class SelectProblemWindow extends Window{
 
         var btn = new JButton("게임시작");
         btn.addActionListener((e) -> {
-            var gameWindow = new InGameWindow();
-            gameWindow.getGamePanel().setSudokuProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
-            SudokuSystem.getInstance().getWindowManager().setCurrentWindow(gameWindow);
+            var system = SudokuSystem.getInstance();
+            system.setProblem("000806010060000000809000000010000000000050090050000001000000007000009000320001000");
+            system.getWindowManager().setCurrentWindow(new InGameWindow());
         });
         pane.add(btn);
     }

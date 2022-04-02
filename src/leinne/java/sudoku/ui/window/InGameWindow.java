@@ -1,7 +1,7 @@
 package leinne.java.sudoku.ui.window;
 
 import leinne.java.sudoku.SudokuSystem;
-import leinne.java.sudoku.ui.component.GamePanel;
+import leinne.java.sudoku.ui.component.NumberTextField;
 
 import java.awt.*;
 import javax.swing.*;
@@ -12,7 +12,7 @@ public class InGameWindow extends Window{
 
     private long startTime;
     private final Timer timer = new Timer(20, null);
-    private final GamePanel gamePanel = new GamePanel(new GridLayout(9, 9, 0, 0));
+    private final JPanel gamePanel = new JPanel(new GridLayout(9, 9, 0, 0));
 
     protected void initDesign(){
         var main = getContentPane();
@@ -35,9 +35,9 @@ public class InGameWindow extends Window{
 
         var btnClear = new JButton("초기화");
         btnClear.addActionListener((event) -> {
-            for(var tile : gamePanel.getNumberTiles()){
-                if(!tile.isProblemNumber()){
-                    tile.setNumber(0, false);
+            for(var tiles : SudokuSystem.getInstance().getNumberTiles()){
+                for(var tile : tiles){
+                    tile.clear();
                 }
             }
         });
@@ -46,6 +46,13 @@ public class InGameWindow extends Window{
         var btnStop = new JButton("중단");
         btnStop.addActionListener((event) -> SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new SelectProblemWindow()));
         topPanel.add(btnStop);
+
+        // add number text field
+        for(var tiles : SudokuSystem.getInstance().getNumberTiles()){
+            for(var tile : tiles){
+                gamePanel.add(new NumberTextField(tile));
+            }
+        }
     }
 
     public void open(){
@@ -65,10 +72,6 @@ public class InGameWindow extends Window{
 
     public long getTime(){
         return (System.nanoTime() - startTime) / 10000000;
-    }
-
-    public GamePanel getGamePanel(){
-        return gamePanel;
     }
 
     public void saveRecode(){
