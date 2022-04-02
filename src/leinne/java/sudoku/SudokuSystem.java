@@ -7,6 +7,9 @@ import leinne.java.sudoku.ui.window.InGameWindow;
 import leinne.java.sudoku.ui.window.LoginWindow;
 import leinne.java.sudoku.ui.window.WindowManager;
 import leinne.java.sudoku.util.SudokuUtils;
+import leinne.java.sudoku.util.Utils;
+
+import javax.swing.*;
 
 public final class SudokuSystem{
 
@@ -35,7 +38,11 @@ public final class SudokuSystem{
 
     private void startApp(){
         FlatLightLaf.setup();
-        dbManager.connect();
+        while(!dbManager.connect()){
+            if(Utils.showDialog("DB 접속 실패", "DB 서버에 접속할 수 없습니다.\n다시 시도하시겠습니까?") != JOptionPane.YES_OPTION){
+                System.exit(0);
+            }
+        }
 
         for(var i = 0; i < 9; ++i){
             for(var j = 0; j < 9; ++j){

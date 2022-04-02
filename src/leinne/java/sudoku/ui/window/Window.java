@@ -1,6 +1,7 @@
 package leinne.java.sudoku.ui.window;
 
 import leinne.java.sudoku.SudokuSystem;
+import leinne.java.sudoku.util.Utils;
 
 import javax.swing.*;
 import java.awt.event.WindowEvent;
@@ -44,11 +45,7 @@ public abstract class Window extends JFrame{
     }
 
     public void onClosing(){
-        if (JOptionPane.showConfirmDialog(this,
-                "정말로 게임을 종료하시겠습니까?",
-                "게임 종료",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+        if (Utils.showDialog(this, "게임종료", "정말로 게임을 종료하시겠습니까?") == JOptionPane.YES_OPTION){
             System.exit(0);
         }
     }
