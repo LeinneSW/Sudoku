@@ -1,5 +1,6 @@
 package leinne.java.sudoku.ui.component;
 
+import com.formdev.flatlaf.ui.FlatBorder;
 import leinne.java.sudoku.SudokuSystem;
 import leinne.java.sudoku.entity.NumberTile;
 
@@ -10,12 +11,14 @@ import java.awt.event.KeyEvent;
 
 public final class NumberTextField extends JTextField{
 
+    private static boolean changeDesign = false;
+
     public static final class Style{
-        public static final Color FIXED_ODD = new Color(227, 227, 227);
+        public static final Color FIXED_ODD = new Color(230, 230, 230);
         public static final Color WARNING_ODD = new Color(241, 137, 137);
         public static final Color DEFAULT_ODD = new Color(255, 255, 197);
 
-        public static final Color FIXED_EVEN = new Color(190, 190, 190);
+        public static final Color FIXED_EVEN = new Color(200, 200, 200);
         public static final Color WARNING_EVEN = new Color(225, 102, 102);
         public static final Color DEFAULT_EVEN = new Color(255, 255, 255);
 
@@ -52,6 +55,22 @@ public final class NumberTextField extends JTextField{
                 }
             }
         });
+
+        /*
+         * Hack: Using the reflection class to change the design of the TextField
+         */
+        try{
+            if(changeDesign) return;
+            changeDesign = true;
+
+            var field = FlatBorder.class.getDeclaredField("innerFocusWidth");
+            field.setAccessible(true);
+            field.set(getBorder(), 3);
+
+            field = FlatBorder.class.getDeclaredField("borderColor");
+            field.setAccessible(true);
+            field.set(getBorder(), new Color(185, 185, 185));
+        }catch(Exception e){}
     }
 
     public void updateStyle(){
