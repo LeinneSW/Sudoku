@@ -17,7 +17,19 @@ public final class SudokuSystem{
     private final NumberTile[][] gameBoard = new NumberTile[9][9];
 
     public static void main(String[] args){
-        instance.startApp();
+        FlatLightLaf.setup();
+        /*while(!instance.dbManager.connect()){
+            if(Utils.showDialog("DB 접속 실패", "DB 서버에 접속할 수 없습니다.\n다시 시도하시겠습니까?") != JOptionPane.YES_OPTION){
+                System.exit(0);
+            }
+        }*/
+
+        for(var i = 0; i < 9; ++i){
+            for(var j = 0; j < 9; ++j){
+                instance.gameBoard[i][j] = new NumberTile(i, j);
+            }
+        }
+        instance.windowManager.setCurrentWindow(new LoginWindow());
     }
 
     public static SudokuSystem getInstance(){
@@ -30,22 +42,6 @@ public final class SudokuSystem{
 
     public WindowManager getWindowManager(){
         return windowManager;
-    }
-
-    private void startApp(){
-        FlatLightLaf.setup();
-        /*while(!dbManager.connect()){
-            if(Utils.showDialog("DB 접속 실패", "DB 서버에 접속할 수 없습니다.\n다시 시도하시겠습니까?") != JOptionPane.YES_OPTION){
-                System.exit(0);
-            }
-        }*/
-
-        for(var i = 0; i < 9; ++i){
-            for(var j = 0; j < 9; ++j){
-                gameBoard[i][j] = new NumberTile(i, j);
-            }
-        }
-        windowManager.setCurrentWindow(new LoginWindow());
     }
 
     public void setProblem(String sudoku){
