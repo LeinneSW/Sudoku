@@ -17,11 +17,11 @@ public class Utils{
         return number > 9 ? 0 : Math.max(number, 0);
     }
 
-    public static int showDialog(String title, String message){
-        return showDialog(null, title, message);
+    public static int showYesNoDialog(String title, String message){
+        return showYesNoDialog(null, title, message);
     }
 
-    public static int showDialog(Component parent, String title, String message){
+    public static int showYesNoDialog(Component parent, String title, String message){
         return JOptionPane.showConfirmDialog(parent, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
     }
 }

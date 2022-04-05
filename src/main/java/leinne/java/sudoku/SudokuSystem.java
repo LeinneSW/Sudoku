@@ -19,7 +19,7 @@ public final class SudokuSystem{
     public static void main(String[] args){
         FlatLightLaf.setup();
         /*while(!instance.dbManager.connect()){
-            if(Utils.showDialog("DB 접속 실패", "DB 서버에 접속할 수 없습니다.\n다시 시도하시겠습니까?") != JOptionPane.YES_OPTION){
+            if(Utils.showYesNoDialog("DB 접속 실패", "DB 서버에 접속할 수 없습니다.\n다시 시도하시겠습니까?") != JOptionPane.YES_OPTION){
                 System.exit(0);
             }
         }*/
