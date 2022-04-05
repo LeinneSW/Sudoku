@@ -74,12 +74,16 @@ public class NumberTile{
 
     public void addNesting(int index){
         nesting.add(index);
-        textField.updateStyle();
+        if(textField != null){
+            textField.updateStyle();
+        }
     }
 
     public void removeNesting(int index){
         nesting.remove(index);
-        textField.updateStyle();
+        if(textField != null){
+            textField.updateStyle();
+        }
     }
 
     public int getNestingCount(){
