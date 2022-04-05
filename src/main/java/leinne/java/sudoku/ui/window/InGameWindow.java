@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class InGameWindow extends Window{
 
-    private static final String TIMER_FORMAT = "%02d:%02d:%02d'%02d              ";
+    private static final String TIMER_FORMAT = "%02d:%02d:%02d'%02d           ";
 
     private long startTime;
     private final Timer timer = new Timer(20, null);
@@ -23,7 +23,7 @@ public class InGameWindow extends Window{
         main.add(gamePanel, BorderLayout.CENTER);
 
         // create timer, menu button
-        var lblTimer = new JLabel("00:00:00'00              ");
+        var lblTimer = new JLabel("00:00:00'00           ");
         lblTimer.setFont(new Font("Dialog", Font.BOLD, 32));
         topPanel.add(lblTimer);
 
@@ -70,9 +70,5 @@ public class InGameWindow extends Window{
 
     public long getTime(){
         return (System.nanoTime() - startTime) / 10000000;
-    }
-
-    public void saveRecode(){
-        // TODO
     }
 }
