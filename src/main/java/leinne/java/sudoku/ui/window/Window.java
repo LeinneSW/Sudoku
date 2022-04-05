@@ -13,7 +13,6 @@ public abstract class Window extends JFrame{
 
     public Window(){
         super("스도쿠");
-        setSize(500, 600);
         setResizable(false);
         addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent windowEvent){
