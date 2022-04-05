@@ -68,9 +68,12 @@ public class NumberTile{
     }
 
     public void clear(boolean force){
-        if(!problem || force){
+        if(!problem){
             nesting.clear();
             setNumber(0);
+        }else if(force){
+            nesting.clear();
+            setNumber(0, false);
         }
     }
 
