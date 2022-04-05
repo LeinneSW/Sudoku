@@ -49,9 +49,9 @@ public final class NumberTextField extends JTextField{
             public void keyReleased(KeyEvent e){
                 var c = e.getKeyChar();
                 if('1' <= c && c <= '9'){
-                    SudokuSystem.getInstance().setNumber(numberTile, c - 48);
+                    numberTile.setNumber(c - 48);
                 }else if(c == '0' || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE){
-                    SudokuSystem.getInstance().setNumber(numberTile, 0);
+                    numberTile.setNumber(0);
                 }
             }
         });

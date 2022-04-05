@@ -51,8 +51,10 @@ public class NumberTile{
     }
 
     public void setNumber(int number, boolean isProblem){
-        this.number = Utils.convertNumber(number);
-        this.problem = isProblem && this.number > 0;
+        number = Utils.convertNumber(number);
+        this.problem = isProblem && number > 0;
+        SudokuSystem.getInstance().checkVerifyNumbers(this, number);
+        this.number = number;
 
         if(textField != null){
             textField.setFocusable(!problem);

@@ -76,11 +76,8 @@ public final class SudokuSystem{
         return gameBoard;
     }
 
-    public void setNumber(NumberTile my, int number){
-        if(my.isProblem()){
-            my.setNumber(number);
-            return;
-        }else if(!my.isValid()){
+    public void checkVerifyNumbers(NumberTile my, int number){
+        if(my.isProblem() || !my.isValid()){
             return;
         }
 
@@ -94,7 +91,6 @@ public final class SudokuSystem{
                 verifyNumber(my, gameBoard[rowStart][colStart], number);
             }
         }
-        my.setNumber(number);
     }
 
     private void verifyNumber(NumberTile my, NumberTile other, int number){
