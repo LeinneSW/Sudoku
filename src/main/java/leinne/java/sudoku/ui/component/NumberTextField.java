@@ -74,18 +74,16 @@ public final class NumberTextField extends JTextField{
     }
 
     public void updateStyle(){
-        Font font = Style.DEFAULT_FONT;
         Color color;
-        if(numberTile.isProblem()){
-            font = Style.FIXED_FONT;
-            color = colorType ? Style.FIXED_EVEN : Style.FIXED_ODD;
-        }else if(numberTile.getNestingCount() == 0){
-            color = colorType ? Style.DEFAULT_EVEN : Style.DEFAULT_ODD;
-        }else{
+        if(numberTile.getNestingCount() > 0){
             color = colorType ? Style.WARNING_EVEN : Style.WARNING_ODD;
+        }else if(numberTile.isProblem()){
+            color = colorType ? Style.FIXED_EVEN : Style.FIXED_ODD;
+        }else{
+            color = colorType ? Style.DEFAULT_EVEN : Style.DEFAULT_ODD;
         }
-        setFont(font);
         setBackground(color);
         setCaretColor(color); // invisible cursor
+        setFont(numberTile.isProblem() ? Style.FIXED_FONT : Style.DEFAULT_FONT);
     }
 }
