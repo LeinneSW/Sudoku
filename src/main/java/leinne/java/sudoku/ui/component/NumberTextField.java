@@ -1,7 +1,6 @@
 package leinne.java.sudoku.ui.component;
 
 import com.formdev.flatlaf.ui.FlatBorder;
-import leinne.java.sudoku.SudokuSystem;
 import leinne.java.sudoku.entity.NumberTile;
 
 import javax.swing.*;
