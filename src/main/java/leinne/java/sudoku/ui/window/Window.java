@@ -45,7 +45,7 @@ public abstract class Window extends JFrame{
     }
 
     public void onClosing(){
-        if (Utils.showYesNoDialog(this, "게임종료", "정말로 게임을 종료하시겠습니까?") == JOptionPane.YES_OPTION){
+        if(Utils.showYesNoDialog(this, "게임종료", "정말로 게임을 종료하시겠습니까?") == JOptionPane.YES_OPTION){
             System.exit(0);
         }
     }
