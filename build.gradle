@@ -17,7 +17,7 @@ dependencies{
 }
 
 application{
-    mainClassName = 'leinne.java.sudoku.SudokuSystem'
+    mainClass.set('leinne.java.sudoku.SudokuSystem')
 }
 
 compileJava.options.encoding = 'utf-8'
