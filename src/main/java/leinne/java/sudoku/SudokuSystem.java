@@ -77,7 +77,10 @@ public final class SudokuSystem{
     }
 
     public void setNumber(NumberTile my, int number){
-        if(!my.isValid()){
+        if(my.isProblem()){
+            my.setNumber(number);
+            return;
+        }else if(!my.isValid()){
             return;
         }
 
