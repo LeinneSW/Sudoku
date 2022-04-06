@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class SudokuUtils{
 
-    public static int[][] parse(String sudoku){
-        if(sudoku.length() != 81){
+    public static int[][] parse(String rawSudoku){
+        if(rawSudoku.length() != 81){
             throw new IllegalArgumentException("Wrong problem. Sudoku must consist of 81 numbers.");
         }
 
         var sudokuArray = new int[9][9];
-        var sudokuSplit = sudoku.trim().split("");
+        var sudokuSplit = rawSudoku.trim().split("");
         for(int i = 0; i < 9; ++i){
             for(int j = 0; j < 9; ++j){
                 sudokuArray[i][j] = Utils.parseInt(sudokuSplit[i * 9 + j]);
@@ -80,6 +80,10 @@ public class SudokuUtils{
         return solveBoard;
     }
 
+    public static boolean isValidNumber(int number){
+        return 0 <= number && number <= 9;
+     }
+
     public static boolean isValidProblem(int[][] problem){
         if(problem.length != 9){
             return false;
@@ -87,7 +91,7 @@ public class SudokuUtils{
 
         for(int i = 0; i < 9; ++i){
             for(int j = 0; j < 9; ++j){
-                if(problem[i].length != 9 || (problem[i][j] > 0 && isNestedNumber(i, j, problem))){
+                if(problem[i].length != 9 || !isValidNumber(problem[i][j]) || isNestedNumber(i, j, problem)){
                     return false;
                 }
             }
@@ -96,6 +100,10 @@ public class SudokuUtils{
     }
 
     private static boolean isNestedNumber(int row, int column, int[][] board){
+        if(board[row][column] == 0){
+            return false;
+        }
+
         for(int i = 0; i < 9; ++i){
             if(i != column && board[row][i] == board[row][column]) return true;
             if(i != row && board[i][column] == board[row][column]) return true;
