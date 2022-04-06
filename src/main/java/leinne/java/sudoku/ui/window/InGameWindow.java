@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class InGameWindow extends Window{
 
-    private static final String TIMER_FORMAT = "%02d:%02d:%02d'%02d           ";
+    private static final String TIMER_FORMAT = "%02d:%02d:%02d'%02d                 ";
 
     private long startTime;
     private final Timer timer = new Timer(20, null);
@@ -23,14 +23,14 @@ public class InGameWindow extends Window{
         main.add(gamePanel, BorderLayout.CENTER);
 
         // create timer, menu button
-        var lblTimer = new JLabel("00:00:00'00           ");
-        lblTimer.setFont(new Font("Dialog", Font.BOLD, 32));
+        var lblTimer = new JLabel("00:00:00'00                 ");
+        lblTimer.setFont(new Font("Dialog", Font.BOLD, 33));
         topPanel.add(lblTimer);
 
         timer.addActionListener((event) -> {
             var time = getTime();
             var second = time / 100;
-            lblTimer.setText(String.format(TIMER_FORMAT, second / 3600, second / 60 % 60, second % 60, time % 100));
+            lblTimer.setText(String.format(TIMER_FORMAT, second / 3600 % 100, second / 60 % 60, second % 60, time % 100));
         });
 
         var btnClear = new JButton("초기화");
