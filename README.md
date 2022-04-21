@@ -10,3 +10,4 @@ A 9 * 9 board is common, and all you have to do is fill in all the numbers from 
 - int4j v0.5.4
 - FlatLaf v2.1
 - MariaDB v3.0.4
+- spring-security-crypto v5.6.2
