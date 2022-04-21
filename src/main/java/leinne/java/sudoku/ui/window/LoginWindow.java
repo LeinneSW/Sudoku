@@ -55,7 +55,14 @@ public class LoginWindow extends Window{
         // TODO: login
         var btnLogin = new JButton("로그인");
         btnLogin.setFont(new Font("NanumGothic", Font.BOLD, 18));
-        btnLogin.addActionListener(event -> SudokuSystem.getInstance().getWindowManager().setCurrentWindow(new SelectProblemWindow()));
+        btnLogin.addActionListener(event -> {
+            var system = SudokuSystem.getInstance();
+            if(system.getDBManager().checkAccount(txtId.getText(), new String(txtPass.getPassword()))){
+                system.getWindowManager().setCurrentWindow(new SelectProblemWindow());
+            }else{
+                JOptionPane.showConfirmDialog(this, "아이디 혹은 비밀번호를 확인하세요.", "로그인 실패", JOptionPane.DEFAULT_OPTION);
+            }
+        });
         btnLogin.setBounds(60, 315, 386, 45);
         panel.add(btnLogin);
 

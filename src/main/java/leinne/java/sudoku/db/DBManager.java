@@ -1,6 +1,7 @@
 package leinne.java.sudoku.db;
 
 import leinne.java.sudoku.SudokuSystem;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -50,5 +51,23 @@ public class DBManager{
 
     public Connection getConnection(){
         return connection;
+    }
+
+    public boolean checkAccount(String id, String password){
+        if(offline){
+            return true;
+        }
+
+        if(id.length() <= 0 || password.length() <= 0){
+            return false;
+        }
+
+        try{
+            var statement = connection.prepareStatement("SELECT * FROM user WHERE id=?");
+            statement.setString(1, id);
+            var resultSet = statement.executeQuery();
+            return resultSet.first() && BCrypt.checkpw(password, resultSet.getString("password"));
+        }catch(SQLException e){}
+        return false;
     }
 }
