@@ -8,18 +8,15 @@ import java.sql.SQLException;
 
 public class DBManager{
 
+    private boolean offline = false;
     private Connection connection = null;
 
     public boolean connect(){
-        var config = SudokuSystem.getInstance().getConfig();
-        if(!config.getBoolean("database", "allow", true)){
-            return true;
-        }
-
-        if(!isClosed()){
+        if(isConnected()){
             return false;
         }
 
+        var config = SudokuSystem.getInstance().getConfig();
         try{
             var ip = config.get("database", "ip");
             var port = config.get("database", "port");
@@ -39,11 +36,15 @@ public class DBManager{
         }
     }
 
-    public boolean isClosed(){
+    public void setOffline(boolean value){
+        offline = value;
+    }
+
+    public boolean isConnected(){
         try{
-            return connection == null || connection.isClosed();
+            return offline || connection != null && !connection.isClosed();
         }catch(SQLException e){
-            return true;
+            return false;
         }
     }
 

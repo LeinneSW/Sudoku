@@ -30,13 +30,4 @@ public class Config{
         var value = ini.get(section, key);
         return value == null ? defaultValue : value;
     }
-
-    public boolean getBoolean(String section, String key){
-        return getBoolean(section, key, false);
-    }
-
-    public boolean getBoolean(String section, String key, boolean defaultValue){
-        var value = ini.get(section, key);
-        return value == null ? defaultValue : Boolean.parseBoolean(value);
-    }
 }
